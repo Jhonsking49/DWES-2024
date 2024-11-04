@@ -104,8 +104,9 @@
         </form>
 
         <!-- Botón para agregar nueva película -->
-        <button onclick="window.location.href='mainController.php?action=showAddForm'">Agregar Película</button>
-
+        <form method="POST" action="index.php?action=add">
+            <button onclick="window.location.href='mainController.php?action=showAddForm'">Agregar Película</button>
+        </form>
         <!-- Tabla de películas -->
         <table>
             <tr>
@@ -123,7 +124,10 @@
                     <td><img src="images/<?php echo $movie->getPoster(); ?>" alt="Poster"></td>
                     <td class="actions">
                         <!-- Botón de editar película -->
-                        <button onclick="window.location.href='mainController.php?action=showEditForm&id=<?php echo $movie->getId(); ?>'">Editar</button>
+                        <form method="POST" action="index.php?action=edit">
+                            <input type="hidden" name="id" value="<?php echo $movie->getId(); ?>">
+                            <button onclick="window.location.href='mainController.php?action=showEditForm&id=<?php echo $movie->getId(); ?>'">Editar</button>
+                        </form>
                         </td>
                 </tr>
             <?php endforeach; ?>

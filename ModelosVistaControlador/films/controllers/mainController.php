@@ -25,6 +25,7 @@ if (isset($_GET['action'])) {
 
         case 'add':
             // Redirigir a FilmController para agregar la película
+            include("views/AddView.php");
             FilmController::addFilm();
             break;
 
@@ -37,6 +38,7 @@ if (isset($_GET['action'])) {
 
         case 'edit':
             // Redirigir a FilmController para editar la película
+            include("views/EditView.php");
             FilmController::editFilm();
             break;
 
