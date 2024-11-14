@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <?php
+    if (isset($_SESSION['user'])) {
+        echo "Welcome, " . $_SESSION['user']->getUsername();
+
+        if ($_SESSION['user']->getRol()) {
+            echo "<a href='index.php?c=product&newProduct=1'>Nuevo producto</a>";
+        }
+    }
+    ?>
+    <h2>Nuevo Producto</h2>
+    <form method="post" action="index.php?c=product" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="nombre del producto">
+        <input type="text" name="price" placeholder="precio">
+        <input type="text" name="stock" placeholder="stock">
+        <textarea name="description"></textarea>
+        <input type="file" name="img">
+        <input type="submit" name="addProduct" value="Agregar">
+    </form>
+</body>
+
+</html>
