@@ -2,18 +2,18 @@
 
 class UserModel
 {
+
     private $id;
     private $username;
-    private $email;
-    private $avatar;
+    private $password;
     private $rol;
 
-    public function __construct($id, $username, $rol, $email, $avatar)
+
+    function __construct($id, $username, $password, $rol)
     {
         $this->id = $id;
         $this->username = $username;
-        $this->email = $email;
-        $this->avatar = $avatar;
+        $this->password = $password;
         $this->rol = $rol;
     }
 
@@ -27,14 +27,9 @@ class UserModel
         return $this->username;
     }
 
-    public function getEmail()
+    public function getPassword()
     {
-        return $this->email;
-    }
-
-    public function getAvatar()
-    {
-        return $this->avatar;
+        return $this->password;
     }
 
     public function getRol()
@@ -42,3 +37,6 @@ class UserModel
         return $this->rol;
     }
 }
+
+
+?>

@@ -19,8 +19,12 @@
         }
     }
 
-    foreach ($elementos as $element) {
-        echo "<p>" . $element->getName();
+    foreach ($forums as $forum) {
+        echo "<p>" . $forum->getForoname() . "</p>";
+        echo "<p>" . $forum->getDescription() . "</p>";
+        // añadir boton para acceder al foro
+        echo "<p>";
+        echo "<a href='index.php?c=forum&getForum=" . $forum->getId() . "'>Unirse al foro</a>";
         echo "</p>";
     }
 
