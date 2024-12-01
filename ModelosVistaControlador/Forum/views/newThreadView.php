@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vista del Foro</title>
+    <title>Vista para añadir un nuevo hilo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,22 +31,18 @@
     </style>
 </head>
 <body>
-    <div class="forum-header">
-        <h1><?php echo ($forum->getForoname()); ?></h1>
-        <p><?php echo ($forum->getDescription()); ?></p>
-        <p><?php echo ($forum->getId()); ?></p>
-    </div>
-
+    <?php
+    $getForumid = $_GET['getForumid'];
+    ?>
     <div class="threads">
-        <h2>Hilos en este foro:</h2>
-        <a href="index.php?c=thread&newThread=1&getForumid=<?php echo $forum->getId(); ?>">Crear un nuevo hilo</a>
-        <?php
-        foreach ($threads as $thread) {
-            echo "<div class='thread-item'>";
-            echo "<a href='index.php?c=thread&getThreadid=" . $thread->getId() . "'>" . $thread->getThreadTitle() . "</a>";
-            echo "</div>";
-        }
-        ?>
-        </div>
+        <h1>Crear un nuevo hilo</h1>
+        <form action="index.php?c=thread&newThread&getForumid=<?php echo $getForumid; ?>" method="post">
+            <label for="title">Título del hilo:</label>
+            <input type="text" id="title" name="title" required><br><br>
+            <label for="content">Contenido del hilo:</label>
+            <textarea id="content" name="content" required></textarea><br><br>
+            <input type="submit" value="Crear hilo">
+        </form>
+    </div>
 </body>
 </html>

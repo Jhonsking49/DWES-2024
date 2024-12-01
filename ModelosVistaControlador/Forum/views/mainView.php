@@ -24,7 +24,7 @@
         echo "<p>" . $forum->getDescription() . "</p>";
         // añadir boton para acceder al foro
         echo "<p>";
-        echo "<a href='index.php?c=forum&getForum=" . $forum->getId() . "'>Unirse al foro</a>";
+        echo "<a href='index.php?c=forum&getForumid=" . $forum->getId() . "'>Unirse al foro</a>";
         echo "</p>";
     }
 

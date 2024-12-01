@@ -6,15 +6,13 @@ class CommentaryModel
     private $comment;
     private $idUser;
     private $idThread;
-    private $date;
 
-    public function __construct($id, $comment, $idUser, $idThread, $date)
+    public function __construct($id, $comment, $idUser, $idThread)
     {
         $this->id = $id;
         $this->comment = $comment;
         $this->idUser = $idUser;
         $this->idThread = $idThread;
-        $this->date = $date;
     }
 
     public function getId()
@@ -37,8 +35,18 @@ class CommentaryModel
         return $this->idThread;
     }
 
-    public function getDate()
+    public function setComment($comment)
     {
-        return $this->date;
+        $this->comment = $comment;
+    }
+
+    public function setIdUser($idUser)
+    {
+        $this->idUser = $idUser;
+    }
+
+    public function setIdThread($idThread)
+    {
+        $this->idThread = $idThread;
     }
 }

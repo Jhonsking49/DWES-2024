@@ -23,6 +23,7 @@ if (isset($_GET['getForum'])) {
 
 if (isset($_GET['getForumid'])) {
     $forum = ForumRepository::getForumById($_GET['getForumid']);
+    $threads = ThreadRepository::getThreadByForumId($_GET['getForumid']);
     require_once 'views/forumView.php';
     
 }

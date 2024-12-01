@@ -1,8 +1,11 @@
 <?php
 
 if (isset($_GET['newThread'])) {
-    $thread = new ThreadModel(null, $_POST['title'], $_POST['content'], $_SESSION['user']->getId(), $_GET['getForumid'], date('Y-m-d H:i:s'));
-    ThreadRepository::addThread($thread->getThreadTitle(), $thread->getDescription(), $thread->getIdCreator(), $thread->getIdForum(), $thread->getDate());
+    require_once 'views/newThreadView.php';
+    if(isset($_POST['title']) && isset($_POST['content'])) {
+        $thread = new ThreadModel(null, $_POST['title'], $_POST['content'], $_SESSION['user']->getId(), $_GET['getForumid'], date('Y-m-d H:i:s'));
+        ThreadRepository::addThread($thread->getThreadTitle(), $thread->getDescription(), $thread->getIdCreator(), $thread->getIdForum(), $thread->getDate());
+    }
 }
 
 if (isset($_GET['editThread'])) {

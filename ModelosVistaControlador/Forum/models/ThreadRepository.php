@@ -6,7 +6,7 @@ class ThreadRepository
     public static function getThreadById($id)
     {
         $connect = Connection::connect();
-        $query = "SELECT * FROM thread WHERE id = $id";
+        $query = "SELECT * FROM threads WHERE id = $id";
         $result = $connect->query($query);
         if ($thread = $result->fetch_assoc()) {
             return new ThreadModel($thread['id'], $thread['threadTitle'], $thread['description'], $thread['idCreator'], $thread['idForum'], $thread['date']);
@@ -16,7 +16,7 @@ class ThreadRepository
     public static function addThread($threadTitle, $description, $idCreator, $idForum, $date)
     {
         $connect = Connection::connect();
-        $query = "INSERT INTO thread (id, threadTitle, description, idCreator, idForum, date) VALUES (NULL, '$threadTitle', '$description', '$idCreator', '$idForum', '$date')";
+        $query = "INSERT INTO threads (id, threadTitle, description, idCreator, idForum, date) VALUES (NULL, '$threadTitle', '$description', '$idCreator', '$idForum', '$date')";
         $result = $connect->query($query);
         if ($result) {
             return new ThreadModel(null, $threadTitle, $description, $idCreator, $idForum, $date);
@@ -36,7 +36,7 @@ class ThreadRepository
     public static function deleteThread($id)
     {
         $connect = Connection::connect();
-        $query = "DELETE FROM thread WHERE id = $id";
+        $query = "DELETE FROM threads WHERE id = $id";
         $result = $connect->query($query);
         if ($result) {
             return true;
@@ -46,7 +46,19 @@ class ThreadRepository
     public static function getThread()
     {
         $connect = Connection::connect();
-        $query = "SELECT * FROM thread";
+        $query = "SELECT * FROM threads";
+        $result = $connect->query($query);
+        $threads = array();
+        while ($thread = $result->fetch_assoc()) {
+            $threads[] = new ThreadModel($thread['id'], $thread['threadTitle'], $thread['description'], $thread['idCreator'], $thread['idForum'], $thread['date']);
+        }
+        return $threads;
+    }
+
+    public static function getThreadByForumId($id)
+    {
+        $connect = Connection::connect();
+        $query = "SELECT * FROM threads WHERE idForum = $id";
         $result = $connect->query($query);
         $threads = array();
         while ($thread = $result->fetch_assoc()) {
