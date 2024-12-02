@@ -8,13 +8,6 @@
 </head>
 
 <body>
-    <?php
-    if (isset($_SESSION['info'])) {
-        echo "<script>alert('" . $_SESSION['info'] . "')</script>";
-
-        unset($_SESSION['info']); // elimina la variable de sesión
-    }
-    ?>
     <h1>Registrar nuevo usuario</h1>
     <form action="index.php?c=user?register=1" method="post">
         <input type="text" id="name" name="username" required placeholder="nombre usuario"><br><br>
