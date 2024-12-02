@@ -1,32 +1,37 @@
 <?php
+    class cancion{
+        private $id_cancion;
+        private $titulo;
+        private $autor;
+        private $duracion;
+        private $id_lista;
 
-class SongModel {
+        public function __construct($id_cancion, $titulo, $autor, $duracion, $id_lista) {
+            $this->id_cancion = $id_cancion;
+            $this->titulo = $titulo;
+            $this->autor = $autor;
+            $this->duracion = $duracion;
+            $this->id_lista = $id_lista;
+        }
 
-    private $id;
-    private $title;
-    private $author;
-    private $duration;
-    
+        public function getId(){
+            return $this->id_cancion;
+        }
 
-    function __construct($id, $title, $author, $duration) {
-        $this->id=$id;
-        $this->title=$title;
-        $this->author=$author;
-        $this->duration=$duration;
-    }
+        public function getTitulo(){
+            return $this->titulo;
+        }
 
-    public function getId(){
-        return $this->id;
-    }
-    public function getTitle(){
-        return $this->title;
-    }
+        public function getAutor(){
+            return $this->autor;
+        }
 
-    public function getAuthor(){
-        return $this->author;
+        public function getDuracion(){
+            return $this->duracion;
+        }
+
+        public function getIdLista(){
+            return $this->id_lista;
+        }
     }
-    public function getDuration(){
-        return $this->duration;
-    }
-}
 ?>

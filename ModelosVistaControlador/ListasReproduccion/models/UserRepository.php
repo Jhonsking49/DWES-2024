@@ -2,32 +2,45 @@
 
 class UserRepository
 {
-    public static function login($username, $password){
-
-        $db = Conectar::conexion();
-            $q = "SELECT * FROM users WHERE user = '".$username."'";
-            $result = $db->query($q);
-            if ($row = $result->fetch_assoc()) {
-                if ($row['password'] == $password) {
-                    $_SESSION['login'] = true;
-                    $_SESSION['user'] =new UserModel($row['id'], $username, $password, $row['rol']);
-                } 
-            } 
+    public static function getUsers(){
+        $db = Connection::connect();
+        $query = $db->query('SELECT * FROM users');
+        $users = [];
+        while($row = $query->fetch_assoc()){
+            $users[] = new User($row['id_user'], $row['nombre'], $row['admin']);
+        }
+        return $users;
     }
 
-    public static function createUser($username, $password){
+    public static function getUserById($id){
+        $db = Connection::connect();
+        $query = $db->query("SELECT * FROM users WHERE id_user = $id");
+        $row = $query->fetch_assoc();
+        return new User($row['id_user'], $row['nombre'], $row['admin']);
+    }
+
+    public static function register($username, $password) {
+        $db = Connection::connect();
+        $q = "INSERT INTO users (nombre, password) VALUES ('$username', '$password')";
+        if ($db->query($q)) {
+            return $db->insert_id;
+        } else {
+            // Si hay un error, lo mostramos
+            echo "Error en la consulta: " . $db->error;
+        }
+    }
+
+    public static function login($username, $password) {
+        $db = Connection::connect();
+        $q = "SELECT * FROM users WHERE nombre = '$username' AND password = '$password'";
+        $result = $db->query($q);
         
-        $db = Conectar::conexion();
-        $q=("INSERT INTO users VALUES (NULL, '".$username."', '".$password."', 1)");
-        $db->query($q);
-        $q2=("SELECT * FROM users WHERE user = '".$username."'");
-        $result = $db->query($q2);
         if ($row = $result->fetch_assoc()) {
-            
-                $_SESSION['login'] = true;
-                $_SESSION['user'] =new UserModel($row['id'], $username, $password, $row['rol']);
-            
-        } 
+            // Crear objeto User siempre
+            $user = new User($row['id_user'], $row['nombre'], $row['admin']);
+            return $user; // Devolver objeto
+        }
+        return false;
     }
 }
 

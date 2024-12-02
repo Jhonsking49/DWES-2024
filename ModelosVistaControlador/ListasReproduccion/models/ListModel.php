@@ -1,27 +1,32 @@
 <?php
 
-class ListModel{
-
-    private $id;
+class lista{
+    private $id_lista;
+    private $nombreLista;
+    private $id_cancion;
     private $id_user;
-    private $title;
-    
 
-    function __construct($id, $id_user, $title){
-        $this->id=$id;
-        $this->id_user=$id_user;
-        $this->title=$title;
+    public function __construct($id_lista, $nombreLista, $id_cancion, $id_user) {
+        $this->id_lista = $id_lista;
+        $this->nombreLista = $nombreLista;
+        $this->id_cancion = $id_cancion;
+        $this->id_user = $id_user;
     }
 
     public function getId(){
-        return $this->id;
-    }
-    public function getIdUser(){
-        return $this->id_user;
+        return $this->id_lista;
     }
 
-    public function getTitle(){
-        return $this->title;
+    public function getNombre(){
+        return $this->nombreLista;
+    }
+
+    public function getCancion(){
+        return $this->id_cancion;
+    }
+
+    public function getUser(){
+        return $this->id_user;
     }
 }
 ?>

@@ -3,38 +3,26 @@
 class UserModel
 {
 
-    private $id;
-    private $username;
-    private $password;
-    private $rol;
+    private $id_user;
+    private $nombre;
+    private $admin;
 
-
-    function __construct($id, $username, $password, $rol)
-    {
-        $this->id = $id;
-        $this->username = $username;
-        $this->password = $password;
-        $this->rol = $rol;
+    public function __construct($id_user, $nombre, $admin) {
+        $this->id_user = $id_user;
+        $this->nombre = $nombre;
+        $this->admin = $admin;
     }
-
-    public function getId()
-    {
-        return $this->id;
+    
+    public function getId(){
+        return $this->id_user;
     }
-
-    public function getUsername()
-    {
-        return $this->username;
+    
+    public function getNombre(){
+        return $this->nombre;
     }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getRol()
-    {
-        return $this->rol;
+    
+    public function esAdmin(){
+        return $this->admin;
     }
 }
 

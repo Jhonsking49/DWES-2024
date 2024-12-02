@@ -24,7 +24,10 @@ if (isset($_GET['getComment'])) {
 
 if (isset($_GET['getCommentid'])) {
     $comment = CommentaryRepository::getCommentaryById($_GET['getCommentid']);
+    // cargamos la vista de los comentarios
     require_once 'views/commentView.php';
+    // evitamos que se ejecuten dos vistas a la vez
+    exit;
 }
 
 ?>

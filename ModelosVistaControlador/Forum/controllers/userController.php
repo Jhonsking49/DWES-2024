@@ -11,8 +11,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 
 if (isset($_GET['register'])) {
-    $user = UserRepository::register($_POST['username'], $_POST['password']);
-    if ($user) $_SESSION['user'] = $user;
+    require_once 'views/registerView.php';
+    if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+        $user = UserRepository::register($_POST['username'], $_POST['password'], $_POST['email'], $_FILES['avatar']);
+        if ($user) $_SESSION['user'] = $user;
+    }
+    exit;
 }
+
 
 ?>

@@ -8,57 +8,78 @@
 </head>
 
 <body>
-    <h1>hola</h1>
-    <a href="index.php?c=user&logout=1">Logout</a>
+<h1>Página principal</h1>
+    <a href="index.php?c=register&registerView=1">Register</a>
+    <a href="index.php?c=login&loginView=1">Login</a><br><br><br>
+
+    <a href="index.php?c=lista&add=1">Crear lista</a>
+    <?php
+    if (isset($_GET['add'])) {
+        echo "<form action='index.php?c=lista&create=1' method='post'>";
+        echo "Título: <input type='text' name='titulo' required><br>";
+        echo "<input type='submit' value='Crear'>";
+        echo "</form>";
+    }
+    ?>
+
+    <h2>Buscar Canciones</h2>
+    <form action="index.php?c=lista&searchSongs=1" method="post">
+        <input type="text" name="query" placeholder="Buscar por título o autor" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h2>Listas del usuario</h2>
+
+    <?php
+    if (isset($_SESSION['user']) && $_SESSION['user'] !== false) {
+        $listas = ListRepository::getAllListas($_SESSION['user']->getId());
+        foreach ($listas as $lista) {
+            echo "<a href='index.php?c=lista&listaView=1&id=" . $lista->getId() . "'>- Título: " . $lista->getNombre() . "</a><br>";
+            echo "<br>";
+
+            // Enlace para crear una nueva canción
+            echo "<a href='index.php?c=lista&createSong=1&id=" . $lista->getId() . "'>Crear canción</a><br>";
+            if (isset($_GET['createSong']) && $_GET['id'] == $lista->getId()) {
+                echo "<form action='index.php?c=lista&creates=1&id=" . $lista->getId() . "' method='post'>";
+                echo "Canción: <input type='text' name='titulo' required><br>";
+                echo "Autor: <input type='text' name='autor' required><br>";
+                echo "Duración: <input type='number' name='duracion' required><br>";
+                echo "<input type='submit' value='Añadir canción'>";
+                echo "</form>";
+            }
+
+            // Enlace para añadir una canción a la lista
+            echo "<br><a href='index.php?c=lista&addSong=1&id=" . $lista->getId() . "'>Añadir canción a la lista</a><br><br>";
+            if (isset($_GET['addSong']) && $_GET['id'] == $lista->getId()) {
+                echo "<form action='index.php?c=lista&addSongToList=1&id=" . $lista->getId() . "' method='post'>";
+                echo "Canción: <input type='text' name='cancion' list='songList' required><br>";
+                echo "<datalist id='songList'>";
+                
+                // Mostrar las canciones disponibles para añadir
+                $songs = SongRepository::getAllSongsByLista($lista->getId());
+                foreach ($songs as $song) {
+                    echo "<option value='" . $song->getTitulo() . "'>";
+                }
+                echo "</datalist>";
+                
+                echo "<input type='submit' value='Añadir a lista'>";
+                echo "</form>";
+            }
+        }
+    }
+    ?>
+
+    <br><br><br><br><br><br><br>
     <?php
     if (isset($_SESSION['user'])) {
-        echo "Welcome, " . $_SESSION['user']->getUsername();
-
-        if ($_SESSION['user']->getRol()) {
-            echo "<a href='index.php?c=product&newProduct=1'>Nuevo producto</a>";
+        $user = $_SESSION['user'];
+        echo "Hola " . $user->getNombre();
+        if ($user->getNombre() !== 'invitado') {
+            echo " <a href='index.php?c=login&logout=1'>Salir</a><br><br>";
         }
-    }
-
-    if (isset($songs)) {
-        foreach ($songs as $song) {
-            echo '<div class="cancion">';
-            echo '<li>' . htmlspecialchars($song->getTitle()) . '</li>';
-            echo '<form action="asignarCancion.php" method="post">';
-            echo '<label for="playlist">Asignar a lista:</label>';
-            echo '<select name="playlist" id="playlist">';
-    
-            if (isset($lists) && !empty($lists)) {
-                foreach ($lists as $list) {
-                    echo '<option value="' . htmlspecialchars($list->getTitle()) . '">' . htmlspecialchars($list->getTitle()) . '</option>';
-                }
-            } else {
-                echo '<option value="" disabled>No hay listas disponibles</option>';
-            }
-    
-            echo '</select>';
-            echo '<input type="hidden" name="cancion_id" value="' . htmlspecialchars($song->getId()) . '">';
-            echo '<input type="submit" value="Asignar">';
-            echo '</form>';
-            echo '</div>';
-        }
-    }
-    if (!isset($lists)) {
-        echo 'No hay listas';
     } else {
-        foreach ($lists as $list) {
-            echo '<li>' . $list->getTitle() . '</li>';
-        }
+        echo "Bienvenido, invitado. Por favor, inicia sesión.";
     }
-
-        echo
-    '<form action="index.php?n=list" method="post">
-            <input type="submit" name="crearLista" value="Crear lista">
-            </form>';
-
-    echo
-    '<form action="index.php?nc=song" method="post">
-            <input type="submit" name="createSong" value="Introducir nueva canción">
-            </form>';
     ?>
 </body>
 

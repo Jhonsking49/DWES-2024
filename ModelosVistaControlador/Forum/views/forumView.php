@@ -1,40 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vista del Foro</title>
     <style>
+        :root {
+            --verde-oscuro: #146152;
+            --verde-intermedio: #44803F;
+            --verde-claro: #B4CF66;
+            --amarillo: #FFEC5C;
+            --naranja: #FF5A33;
+            --blanco: #ffffff;
+            --gris: #f5f5f5;
+            --texto: #333333;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gris);
+            color: var(--texto);
         }
-        .forum-header {
-            margin-bottom: 20px;
+
+        header {
+            background-color: var(--verde-oscuro);
+            color: var(--blanco);
+            padding: 15px;
+            text-align: center;
         }
-        .forum-header h1 {
+
+        header h1 {
             margin: 0;
         }
-        .threads {
-            margin-top: 20px;
+
+        .forum-header {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: var(--blanco);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .thread-item {
+
+        .forum-header h1 {
+            color: var(--verde-oscuro);
             margin-bottom: 10px;
         }
-        .thread-item a {
-            text-decoration: none;
-            color: #007bff;
+
+        .forum-header p {
+            margin: 5px 0;
         }
-        .thread-item a:hover {
-            text-decoration: underline;
+
+        .threads {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: var(--blanco);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .threads h2 {
+            color: var(--verde-oscuro);
+            margin-bottom: 20px;
+        }
+
+        .threads a {
+            display: inline-block;
+            background-color: var(--verde-intermedio);
+            color: var(--amarillo);
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .threads a:hover {
+            background-color: var(--naranja);
+        }
+
+        .thread-item {
+            margin: 10px 0;
+        }
+
+        .thread-item a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-button {
+            display: block;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .back-button a {
+            display: inline-block;
+            background-color: var(--amarillo);
+            color: var(--texto);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button a:hover {
+            background-color: var(--naranja);
+            color: var(--blanco);
         }
     </style>
 </head>
+
 <body>
+    <header>
+        <h1>Foro</h1>
+    </header>
     <div class="forum-header">
         <h1><?php echo ($forum->getForoname()); ?></h1>
         <p><?php echo ($forum->getDescription()); ?></p>
-        <p><?php echo ($forum->getId()); ?></p>
+        <p>ID del foro: <?php echo ($forum->getId()); ?></p>
     </div>
 
     <div class="threads">
@@ -47,6 +139,11 @@
             echo "</div>";
         }
         ?>
-        </div>
+    </div>
+
+    <div class="back-button">
+        <a href="index.php?c=main">Volver</a>
+    </div>
 </body>
+
 </html>
