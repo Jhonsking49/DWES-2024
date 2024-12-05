@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "lines": [
+            {
+                "idProduct": "1",
+                "idPedido": "1",
+                "lot": "3",
+                "state": "1"
+            },
+            {
+                "idProduct": "2",
+                "idPedido": "1",
+                "lot": "4",
+                "state": "1"
+            }
+        ],
+        "idUser": "1",
+        "state": "1",
+        "datetime": "2023-11-10 13:07:58",
+        "total": "214.96"
+    }
+]
