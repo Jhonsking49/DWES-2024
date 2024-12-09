@@ -55,7 +55,7 @@
             margin-bottom: 20px;
             font-size: 1.2em;
             font-weight: bold;
-            color: var(--verde-intermedio);
+            color: white;
         }
 
         .forum {

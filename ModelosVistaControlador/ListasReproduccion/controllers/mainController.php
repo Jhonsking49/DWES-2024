@@ -14,9 +14,9 @@ session_start();
 
 if (isset($_GET['c'])) {
     require_once('controllers/' . $_GET['c'] . 'Controller.php'); //Coge el controlador que toca segun lo que reciba la variable get
-} else require_once('controllers/listaController.php');
+} else require_once('controllers/listController.php');
 
 // cargar la vista
-require_once("views/ListView.phtml");
+require_once("views/ListView.php");
 
 ?>
