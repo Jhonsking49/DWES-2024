@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>admin</h2>
+
+    <?php
+    foreach ($users as $user) {
+
+        echo "<p>" . $user->getUsername() . " - ";
+
+        switch ($user->getRol()) {
+            case 0:
+                echo "Usuario";
+                break;
+            case 1:
+                echo "Administrador";
+                break;
+            case -1:
+                echo "Baneado";
+                break;
+        }
+        echo "<form action='index.php?c=user' method='post'>
+        
+        <input list='rol' name='rol'>
+       
+        
+        <input type='hidden' name='user' value='" . $user->getId() . "'>
+        <input type='submit' value='Cambiar Rol'>
+        </form>
+        
+        ";
+        echo "</p>";
+    }
+
+    echo " <datalist id='rol'>
+            <option value='0'>Usuario</option>
+            <option value='1'>Administrador</option>
+            <option value='-1'>Baneado</option>
+        </datalist>";
+    ?>
+</body>
+
+</html>

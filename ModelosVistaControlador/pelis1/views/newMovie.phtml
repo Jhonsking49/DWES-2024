@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nueva pelicula</title>
+</head>
+
+<body>
+
+
+    <form action="index.php" method="get">
+        <input type="text" name="search" placeholder="Buscar pelicula">
+        <input type="submit" value="Buscar">
+    </form>
+
+    <h1>añadir nueva peli</h1>
+
+    <form action="index.php" method="post" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="titulo">
+        <input type="text" name="year" placeholder="año">
+        <input type="file" name="poster" placeholder="poster">
+        <input type="submit" name="addMovie" value="Agregar pelicula">
+    </form>
+</body>
+
+</html>

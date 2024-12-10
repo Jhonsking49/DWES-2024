@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Mi lista de peliculas</title>
+</head>
+
+<body>
+
+	<a href="index.php?c=movie&newMovie=1">Añadir pelicula</a>
+
+
+	<form action="index.php?c=movie" method="get">
+		<input type="text" name="search" placeholder="Buscar pelicula">
+		<input type="submit" value="Buscar">
+	</form>
+
+	<?php
+	foreach ($movies as $movie) {
+		echo $movie->getTitle();
+	}
+	?>
+
+</body>
+
+</html>

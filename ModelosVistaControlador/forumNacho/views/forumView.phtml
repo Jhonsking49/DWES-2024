@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <?php
+
+    echo "<h2>" . $forum->getName() . "</h2>";
+
+    foreach ($forum->getThreads() as $thread) {
+        echo "<h3><a href='index.php?c=thread&detail=" . $thread->getId() . "'>" . $thread->getName() . "</a></h3>";
+        echo "<p>" . $thread->getText() . "</p>";
+        echo "<p>Posted by: " . $thread->getAuthor()->getUsername() . "</p>";
+        echo "<hr>";
+    }
+
+    ?>
+</body>
+
+</html>

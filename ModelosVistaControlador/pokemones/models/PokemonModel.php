@@ -4,18 +4,14 @@ class PokemonModel
 {
     private $id;
     private $name;
-    private $description;
-    private $type;
     private $attack;
     private $defense;
 
 
-    public function __construct($id, $name, $description, $type, $attack, $defense)
+    public function __construct($id, $name, $attack, $defense)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->description = $description;
-        $this->type = $type;
         $this->attack = $attack;
         $this->defense = $defense;
 
@@ -29,16 +25,6 @@ class PokemonModel
     public function getName()
     {
         return $this->name;
-    }
-
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    public function getType()
-    {
-        return $this->type;
     }
 
     public function getAttack()

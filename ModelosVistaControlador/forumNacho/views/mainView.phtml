@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>hola</h1>
+    <a href="index.php?c=user&login=1">Login</a>
+    <?php
+    if (isset($_SESSION['user'])) {
+        echo "Welcome, " . $_SESSION['user']->getUsername();
+
+        if ($_SESSION['user']->getRol()) {
+            echo "<a href='index.php?c=user&admin=1'>Admin</a>";
+        }
+    }
+    ?>
+
+    <?php
+    echo "<h2>Foros</h2>";
+
+    foreach ($forums as $forum) {
+        if ($forum->getVisible() || isset($_SESSION['user'])) {
+            echo "<p><a href='index.php?c=forum&detail=" . $forum->getId() . "'>" . $forum->getName();
+            echo "</a></p>";
+        }
+    }
+
+    if (isset($_SESSION['info'])) {
+        echo "<script>alert('" . $_SESSION['info'] . "')</script>";
+        unset($_SESSION['info']);
+    }
+    ?>
+</body>
+
+</html>
