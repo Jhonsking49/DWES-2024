@@ -88,7 +88,7 @@
 <body>
     <div class="container">
         <h1>Editar datos de la empresa</h1>
-        <form action="index.php?c=empresa&editar&id=<?= $empresa->getId() ?>" method="post">
+        <form action="index.php?c=empresa&editEmpresa&id=<?= $empresa->getId() ?>" method="post">
             <label for="nombreEmpresa">Nombre de la empresa:</label>
             <input type="text" name="nombre" id="nombre" value="<?= htmlspecialchars($empresa->getNombre() ?? '') ?>" required>
 
